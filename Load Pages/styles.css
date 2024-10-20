@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Krona+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Krona+One&display=swap');
+
+:root {
+  color: #000;
+  text-align: right;
+  font-family: Barlow;
+  font-size: 16.5px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+body {
+  background: #333;
+}
+
+.barlow-regular {
+  font-family: "Barlow", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.barlow-light {
+  font-family: "Barlow", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.edit-btn {
+  color: black;
+}
+
+.edit-btn:hover {
+  color: rgb(58, 148, 251);
+}
+
+.delete-btn {
+  color: black;
+}
+
+.delete-btn:hover {
+  color: rgb(251, 58, 58);
+}
+
+.krona-one-regular {
+  color: black;
+  font-family: "Krona One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 17px;
+  line-height: normal;
+  letter-spacing: -1.25px;
+}
+
+#subnav{
+  font-size: 15px;
+}
+
+.navtitle{
+  color: #FA0203;
+}
+
+#loadplan{
+  font-size: 25px;
+  color: white;
+}
+
+#upload{
+  font-size: 1.1rem;
+  border-radius: 10px;
+}
