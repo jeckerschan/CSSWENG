@@ -70,3 +70,15 @@ body {
   font-size: 1.1rem;
   border-radius: 10px;
 }
+
+#filter-btn{
+  --bs-btn-active-border-color: white;
+}
+
+input[type="file"]{
+  display: none;
+}
+
+#arrow:active{
+  transform: rotate(180);
+}
