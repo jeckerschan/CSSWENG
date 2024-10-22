@@ -1,4 +1,5 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
+
 const path = require('node:path');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -17,8 +18,13 @@ const createWindow = () => {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, './Register/register.html'));
+  mainWindow.loadFile(path.join(__dirname, './Login/login.html'));
 
+  
+  ipcMain.on('navigate-to-register', (event) => {
+    const webContents = event.sender; 
+    webContents.loadFile(path.join(__dirname, './Register/register.html'));
+  });
   // Open the DevTools.
   //mainWindow.webContents.openDevTools();
 };
