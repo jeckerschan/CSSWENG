@@ -23,6 +23,7 @@ function submitForm() {
     const LoadDate = document.getElementById("loadDateInput").value;
     const Mix = document.getElementById("mixInput").value;
     const Window = document.getElementById("windowInput").value;
+    const Drops = document.getElementById("DropsInput").value
     const WeightUtil = document.getElementById("weightUtilInput").value;
 
  

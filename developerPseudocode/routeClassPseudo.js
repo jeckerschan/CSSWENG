@@ -1,5 +1,5 @@
 class Route{
-    constructor(Plant, SysRoute, FnRoute, SalesOrder, OutDeliver, StoreCode, SEQno, CustomerName, Vol, Weight, Ton, LoadDate, Mix, Window, WeightUtil){
+    constructor(Plant, SysRoute, FnRoute, SalesOrder, OutDeliver, StoreCode, SEQno, CustomerName, Vol, Weight, Ton, LoadDate, Mix, Window, Drops,  WeightUtil){
 
     this.Plant = Plant;
     this.SysRoute = SysRoute;
@@ -15,6 +15,7 @@ class Route{
     this.LoadDate = LoadDate;
     this.Mix = Mix;
     this.Window = Window;
+    this.Drops = Drops;
     this.WeightUtil = WeightUtil;  
     }
 
@@ -58,6 +59,9 @@ class Route{
     get Window(){
         return this.Window
     }
+    get Drops(){
+        return this.Drops
+    }
     get WeightUtil(){
         return this.WeightUtil
     }
@@ -79,6 +83,7 @@ class Route{
            LoadDate:  this.LoadDate, 
            Mix: this.Mix, 
            Window: this.Window, 
+           Drops: this.Drops,
            WeightUtil: this.WeightUtil  
         }
     }
