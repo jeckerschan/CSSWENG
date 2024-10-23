@@ -42,6 +42,7 @@ function submitForm() {
         LoadDate,
         Mix,
         Window,
+        Drops,
         WeightUtil
     );
 
