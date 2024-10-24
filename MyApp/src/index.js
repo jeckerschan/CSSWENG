@@ -25,6 +25,10 @@ const createWindow = () => {
     const webContents = event.sender; 
     webContents.loadFile(path.join(__dirname, './Register/register.html'));
   });
+  ipcMain.on('navigate-to-menu', (event) => {
+    const webContents = event.sender; 
+    webContents.loadFile(path.join(__dirname, './Home/home.html'));
+  });
   // Open the DevTools.
   //mainWindow.webContents.openDevTools();
 };
