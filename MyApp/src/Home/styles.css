@@ -66,6 +66,23 @@ body {
     color: black;
     line-height:5rem;
 }
+#loadPlanBtn, #kpiBtn {
+    outline: none;
+    box-shadow: none; 
+    background-color: transparent;
+    width: 20rem;
+    font-size: 4.3rem;
+    color: black;
+    line-height: 5rem;
+    border: none; 
+    cursor: pointer; 
+}
+#loadPlanBtn:hover, #kpiBtn:hover {
+    text-decoration: underline; 
+    color: #FA0203; 
+}
+
+
 
 html,
 body{
