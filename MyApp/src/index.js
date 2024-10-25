@@ -33,6 +33,10 @@ const createWindow = () => {
     const webContents = event.sender; 
     webContents.loadFile(path.join(__dirname, './Load Plan/upload.html'));
   });
+  ipcMain.on('navigate-to-login', (event) => {
+    const webContents = event.sender; 
+    webContents.loadFile(path.join(__dirname, './Login/login.html'));
+  });
   // Open the DevTools.
   //mainWindow.webContents.openDevTools();
 };

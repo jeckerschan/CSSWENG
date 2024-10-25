@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const signInLink = document.getElementById('signin-link');
     const loadPlanLink = document.getElementById('loadPlanBtn');
     const kpiBtnlink = document.getElementById('kpiBtn')
+    const createAccLink = document.getElementById('create-link')
     
     
     if (registerLink) {
@@ -33,6 +34,16 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.error('load not found'); 
     }
+
+    if (createAccLink) {
+        createAccLink.addEventListener('click', (event) => {
+            event.preventDefault(); 
+            ipcRenderer.send('navigate-to-login'); 
+        });
+    } else {
+        console.error('acc not found'); 
+    }
+
 
 
 
