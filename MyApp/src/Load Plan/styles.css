@@ -71,6 +71,11 @@ body {
   border-radius: 10px;
 }
 
+#editBtn{
+  font-size: 1.1rem;
+  border-radius: 10px;
+}
+
 #filter-btn{
   --bs-btn-active-border-color: white;
 }

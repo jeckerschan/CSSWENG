@@ -4,8 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const registerLink = document.getElementById('register-link');
     const signInLink = document.getElementById('signin-link');
     const loadPlanLink = document.getElementById('loadPlanBtn');
-    const kpiBtnlink = document.getElementById('kpiBtn')
-    const createAccLink = document.getElementById('create-link')
+    const kpiBtnlink = document.getElementById('kpiBtn');
+    const createAccLink = document.getElementById('create-link');
+    const editPlanLink = document.getElementById('editBtn');
     
     
     if (registerLink) {
@@ -42,6 +43,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     } else {
         console.error('acc not found'); 
+    }
+
+    if (editPlanLink) {
+        editPlanLink.addEventListener('click', (event) => {
+            event.preventDefault(); 
+            ipcRenderer.send('navigate-to-edit'); 
+        });
+    } else {
+        console.error('edit page not found'); 
     }
 
 

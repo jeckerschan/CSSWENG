@@ -37,6 +37,12 @@ const createWindow = () => {
     const webContents = event.sender; 
     webContents.loadFile(path.join(__dirname, './Login/login.html'));
   });
+  ipcMain.on('navigate-to-edit', (event) => {
+    const webContents = event.sender; 
+    webContents.loadFile(path.join(__dirname, './Edit/edit.html'));
+  });
+
+
   // Open the DevTools.
   //mainWindow.webContents.openDevTools();
 };
