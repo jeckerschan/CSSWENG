@@ -42,26 +42,37 @@ const createWindow = () => {
     
     mainWindow.loadFile(path.join(__dirname, './Login/login.html'));
 
-   
-    ipcMain.on('navigate-to-register', (event) => {
-        const webContents = event.sender; 
-        webContents.loadFile(path.join(__dirname, './Register/register.html'));
-    });
-    ipcMain.on('navigate-to-menu', (event) => {
-        const webContents = event.sender; 
-        webContents.loadFile(path.join(__dirname, './Home/home.html'));
-    });
-    ipcMain.on('navigate-to-load', (event) => {
-      console.log('navigate-to-load event received');
-        const webContents = event.sender; 
-        webContents.loadFile(path.join(__dirname, './Load Plan/upload.html'));
-    });
-    ipcMain.on('navigate-to-login', (event) => {
-        const webContents = event.sender; 
-        webContents.loadFile(path.join(__dirname, './Login/login.html'));
-    });
+  
+  ipcMain.on('navigate-to-register', (event) => {
+    const webContents = event.sender; 
+    webContents.loadFile(path.join(__dirname, './Register/register.html'));
+  });
+  ipcMain.on('navigate-to-menu', (event) => {
+    const webContents = event.sender; 
+    webContents.loadFile(path.join(__dirname, './Home/home.html'));
+  });
+  ipcMain.on('navigate-to-load', (event) => {
+    const webContents = event.sender; 
+    webContents.loadFile(path.join(__dirname, './Load Plan/upload.html'));
+  });
+  ipcMain.on('navigate-to-login', (event) => {
+    const webContents = event.sender; 
+    webContents.loadFile(path.join(__dirname, './Login/login.html'));
+  });
+  ipcMain.on('navigate-to-edit', (event) => {
+    const webContents = event.sender; 
+    webContents.loadFile(path.join(__dirname, './Edit/edit.html'));
+  });
+  ipcMain.on('navigate-to-kpi', (event) => {
+    const webContents = event.sender; 
+    webContents.loadFile(path.join(__dirname, './KPI/kpi.html'));
+  });
 
-    
+
+
+  // Open the DevTools.
+  //mainWindow.webContents.openDevTools();
+};
     ipcMain.handle('connect-to-database', connectToDatabase); 
 
    
@@ -80,16 +91,6 @@ const createWindow = () => {
             throw new Error('Database query failed');
         }
     });
-
-    ipcMain.on('navigate-to-edit', (event) => {
-        const webContents = event.sender; 
-        webContents.loadFile(path.join(__dirname, './Edit/edit.html'));
-    });
-
-    // Uncomment for debugging
-    // mainWindow.webContents.openDevTools();
-};
-
 // This method will be called when Electron has finished initialization
 app.whenReady().then(() => {
     createWindow();
