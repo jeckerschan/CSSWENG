@@ -3,11 +3,12 @@
 
 const { contextBridge, ipcRenderer } = require('electron');
 
-contextBridge.exposeInMainWorld('electron', {
-    ipcRenderer: {
-        send: (channel, data) => ipcRenderer.send(channel, data),
-        on: (channel, func) => ipcRenderer.on(channel, (event, ...args) => func(...args))
-    }
+contextBridge.exposeInMainWorld('electronAPI', {
+    send: (channel, data) => ipcRenderer.send(channel, data),
+    on: (channel, func) => ipcRenderer.on(channel, (event, ...args) => func(...args)),
+    invoke: (channel, ...args) => ipcRenderer.invoke(channel, ...args),
+    connectToDatabase: () => ipcRenderer.invoke('connect-to-database'),
+    loginAttempt: (email, password) => ipcRenderer.invoke('login-attempt', email, password)
 });
 
-
+console.log('Preload script loaded');
