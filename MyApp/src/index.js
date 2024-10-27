@@ -41,7 +41,10 @@ const createWindow = () => {
     const webContents = event.sender; 
     webContents.loadFile(path.join(__dirname, './Edit/edit.html'));
   });
-
+  ipcMain.on('navigate-to-kpi', (event) => {
+    const webContents = event.sender; 
+    webContents.loadFile(path.join(__dirname, './KPI/kpi.html'));
+  });
 
   // Open the DevTools.
   //mainWindow.webContents.openDevTools();

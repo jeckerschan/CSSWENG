@@ -53,8 +53,12 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.error('edit page not found'); 
     }
-
-
-
-
+    if (kpiBtnlink) {
+        kpiBtnlink.addEventListener('click', (event) => {
+            event.preventDefault(); 
+            ipcRenderer.send('navigate-to-kpi'); 
+        });
+    } else {
+        console.error('edit page not found'); 
+    }
 });
