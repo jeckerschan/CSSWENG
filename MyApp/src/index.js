@@ -4,6 +4,8 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const { MongoClient } = require('mongodb');
 const path = require('path');
 
+
+
 const uri = process.env.MONGODB_URI; 
 const client = new MongoClient(uri); 
 let db; 
@@ -91,6 +93,26 @@ const createWindow = () => {
             throw new Error('Database query failed');
         }
     });
+
+    ipcMain.handle('register-user', async (event, userData) => {
+        try {
+            if (!db) {
+                await connectToDatabase(); 
+            }
+    
+            const usersCollection = db.collection('SwengProject'); 
+            await usersCollection.insertOne(userData); 
+    
+            console.log("User registered successfully");
+            return true; 
+        } catch (error) {
+            console.error('Error saving user:', error);
+            return false; 
+        }
+    });
+
+
+
 // This method will be called when Electron has finished initialization
 app.whenReady().then(() => {
     createWindow();

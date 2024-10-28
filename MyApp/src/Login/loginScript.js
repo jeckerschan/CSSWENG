@@ -1,4 +1,6 @@
-// loginScript.js
+
+
+const registerLink = document.getElementById('register-link');
 document.addEventListener('DOMContentLoaded', () => {
     console.log('electronAPI:', window.electronAPI); 
 
@@ -33,3 +35,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+
+if (registerLink) {
+    registerLink.addEventListener('click', (event) => {
+        event.preventDefault(); 
+        console.log("Register link clicked.");
+        window.electronAPI.send('navigate-to-register'); 
+    });
+} else {
+    console.error('Register link not found');
+}
+
+
+
+        

@@ -11,25 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const editPlanLink = document.getElementById('editBtn');
 
   
-    if (registerLink) {
-        registerLink.addEventListener('click', (event) => {
-            event.preventDefault(); 
-            ipcRenderer.send('navigate-to-register'); 
-        });
-    } else {
-        console.error('Register link not found'); 
-    }
 
-   
-  
-    if (createAccLink) {
-        createAccLink.addEventListener('click', (event) => {
-            event.preventDefault(); 
-            ipcRenderer.send('navigate-to-login'); 
-        });
-    } else {
-        console.error('Create account link not found'); 
-    }
 
     
     if (editPlanLink) {
