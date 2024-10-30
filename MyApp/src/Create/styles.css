@@ -69,3 +69,12 @@ thead{
     font-size: 1.1rem;
     border-radius: 10px;
 }
+
+#title{
+    font-size: 3.7em;
+}
+
+#save{
+    background-color:#FA0203;
+    color:white;
+}
