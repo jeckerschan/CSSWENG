@@ -2,6 +2,7 @@
 require('dotenv').config({ path: 'database.env' });
 const { app, BrowserWindow, ipcMain } = require('electron');
 const { MongoClient } = require('mongodb');
+const bcrypt = require('bcrypt');
 const path = require('path');
 
 
@@ -77,17 +78,16 @@ const createWindow = () => {
 };
     ipcMain.handle('connect-to-database', connectToDatabase); 
 
-   
     ipcMain.handle('login-attempt', async (event, email, password) => {
         try {
-            if (!db) {
-                await connectToDatabase(); 
-            }
-            const usersCollection = db.collection('SwengProject'); 
-            const user = await usersCollection.findOne({ email, password }); 
-
-           
-            return !!user; 
+            const usersCollection = db.collection('SwengProject');
+            const user = await usersCollection.findOne({ email });
+            
+            if (user) {
+                const match = await bcrypt.compare(password, user.password);
+                return match;
+            } 
+            return false;
         } catch (error) {
             console.error('Error during login attempt:', error);
             throw new Error('Database query failed');
@@ -96,20 +96,21 @@ const createWindow = () => {
 
     ipcMain.handle('register-user', async (event, userData) => {
         try {
-            if (!db) {
-                await connectToDatabase(); 
-            }
+            const usersCollection = db.collection('SwengProject');
+            
+            
+            const hashedPassword = await bcrypt.hash(userData.password, 10); 
+            userData.password = hashedPassword;
     
-            const usersCollection = db.collection('SwengProject'); 
-            await usersCollection.insertOne(userData); 
-    
-            console.log("User registered successfully");
+            await usersCollection.insertOne(userData);
             return true; 
         } catch (error) {
             console.error('Error saving user:', error);
-            return false; 
+            return false;
         }
     });
+
+    
 
 
 
