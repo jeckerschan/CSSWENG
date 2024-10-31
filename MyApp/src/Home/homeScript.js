@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 console.log('Load Plan button clicked'); 
-                send('navigate-to-load'); 
+                send('navigate-to-create'); 
             } catch (error) {
                 console.error('Error navigating to upload page:', error);
                 alert('An error occurred while navigating. Please try again.');

@@ -70,6 +70,10 @@ const createWindow = () => {
     const webContents = event.sender; 
     webContents.loadFile(path.join(__dirname, './KPI/kpi.html'));
   });
+  ipcMain.on('navigate-to-create', (event) => {
+    const webContents = event.sender; 
+    webContents.loadFile(path.join(__dirname, './Create/create.html'));
+  });
 
 
 
@@ -110,7 +114,12 @@ const createWindow = () => {
         }
     });
 
-    
+    ipcMain.on('log-routes', (event, routes) => {
+        console.log('Received Routes:', routes);
+        routes.forEach(route => {
+            console.log(`Route ID: ${route.ID}, SEQ: ${route.SEQ}`);
+        });
+    });
 
 
 
