@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
             event.preventDefault(); 
 
             try {
-                console.log('Load Plan button clicked'); 
                 send('navigate-to-create'); 
             } catch (error) {
                 console.error('Error navigating to upload page:', error);

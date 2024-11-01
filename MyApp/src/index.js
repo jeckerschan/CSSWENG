@@ -115,12 +115,34 @@ const createWindow = () => {
     });
 
     ipcMain.on('log-routes', (event, routes) => {
-        console.log('Received Routes:', routes);
-        routes.forEach(route => {
-            console.log(`Route ID: ${route.ID}, SEQ: ${route.SEQ}`);
-        });
+        routesData = routes.map((route, index) => ({
+            sysRoute: route.sysRoute,
+            strCode: route.strCode,
+            sysRouteAmt: route.sysRouteAmt,
+            Mix: route.Mix,
+            window: route.window,
+            weightUtil: route.weightUtil,
+            Plant: route.Plant,
+            saleOrder: route.saleOrder,
+            outDevlieries: route.outDevlieries,
+            customerName: route.customerName,
+            volume: route.volume,
+            Weight: route.Weight,
+            Ton: route.Ton,
+            loadDate: route.loadDate,
+            SEQ: route.SEQ,
+            ID: route.ID
+        }));
+        console.log('Routes stored:', routesData);
     });
 
+    ipcMain.on('request-route-amount', (event) => {
+        event.sender.send('routeAmount', sysRouteAmt); 
+    });
+
+    ipcMain.on('get-routes', (event) => {
+        event.sender.send('routes-data', routesData);
+    });
 
 
 // This method will be called when Electron has finished initialization

@@ -13,6 +13,7 @@ function createRoute(formData, copies = 1, isNewRoute = true) {
         const route = {
             sysRoute: formData.sysRoute,
             strCode: formData.strCode,
+            sysRouteAmt:formData.sysRouteAmt,
             Mix: formData.Mix,
             window: formData.window,
             weightUtil: formData.weightUtil,
