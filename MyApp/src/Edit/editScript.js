@@ -17,8 +17,10 @@ function populateTable(data) {
                     </a>
                 </div>
             </td>
+            <td>${route.rdd}</td>
             <td>${route.Plant}</td>
             <td>${route.sysRoute}</td>
+            <td>${route.finRoute}</td>
             <td>${route.saleOrder}</td>
             <td>${route.outDevlieries}</td>
             <td>${route.strCode}</td>
@@ -29,8 +31,9 @@ function populateTable(data) {
             <td>${route.Ton}</td>
             <td>${route.loadDate}</td>
             <td>${route.Mix}</td>
-            <td>${route.CallTime}</td>
+            <td>${route.callTime}</td>
             <td>${route.window}</td>
+            <td>${route.drop}</td>
             <td>${route.weightUtil}</td>
         `;
         tableBody.appendChild(row);

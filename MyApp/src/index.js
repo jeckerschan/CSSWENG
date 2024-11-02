@@ -117,6 +117,10 @@ const createWindow = () => {
     ipcMain.on('log-routes', (event, routes) => {
         routesData = routes.map((route, index) => ({
             sysRoute: route.sysRoute,
+            rdd: route.rdd,
+            finRoute: route.finRoute,
+            drop: route.drop,
+            callTime: route.callTime,
             strCode: route.strCode,
             sysRouteAmt: route.sysRouteAmt,
             Mix: route.Mix,

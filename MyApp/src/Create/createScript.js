@@ -12,6 +12,10 @@ function createRoute(formData, copies = 1, isNewRoute = true) {
     for (let i = 0; i < copies; i++) {
         const route = {
             sysRoute: formData.sysRoute,
+            rdd: formData.rdd,
+            callTime: formData.callTime,
+            drop: formData.drop,
+            finRoute: formData.finRoute,
             strCode: formData.strCode,
             sysRouteAmt:formData.sysRouteAmt,
             Mix: formData.Mix,
@@ -43,6 +47,10 @@ document.getElementById('save').addEventListener('click', (event) => {
 
     const formData = {
         sysRoute: document.getElementById('sysRoute').value,
+        rdd:document.getElementById('rdd').value,
+        drop:document.getElementById('drop').value,
+        finRoute:document.getElementById('finRoute').value,
+        callTime:document.getElementById('callTime').value,
         strCode: document.getElementById('strCode').value,
         Mix: document.getElementById('Mix').value,
         window: document.getElementById('window').value,
