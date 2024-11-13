@@ -26,7 +26,7 @@
                 });
         }
         window.onload = loadNavbar;
-      </script>
+    </script>
     
     <title>KPI Menu</title>
 </head>
@@ -39,21 +39,21 @@
                 <table class="mt-2 table text-center">
                     <thead>
                         <tr id="header" style="font-size:large;" class="barlow-regular">
-                            <td id="header">Current Date</td>
-                            <td id="header">Hit Count</td>
-                            <td id="header">Miss Count</td>
-                            <td id="header">H/M Ratio</td>
+                            <td>Current Date</td>
+                            <td>Hit Count</td>
+                            <td>Miss Count</td>
+                            <td>H/M Ratio</td>
                         </tr>
                     </thead>
     
                     <tbody class="barlow-light">
                         <tr>
                             <td>03/23/2024</td>
-                            <td>12</td>
-                            <td>55</td>
-                            <td>94.34%</td>
-                          </tr>
-                      </tbody>
+                            <td id="hitCount">12</td>
+                            <td id="missCount">55</td>
+                            <td id="hmRatio">94.34%</td>
+                        </tr>
+                    </tbody>
                 </table>
     
                 <span style="color:#FA0203; font-size:large;" class="mt-3 mb-2 krona-one-regular">Latest Route Added</span>
@@ -61,51 +61,17 @@
                 <table class="table table-hover text-center">
                     <thead>
                         <tr id="header" style="font-size:large;" class="barlow-regular">
-                            <td id="header">Store Code</td>
-                            <td id="header">Window</td>
-                            <td id="header">Entry Time</td>
-                            <td id="header">Exit Time</td>
+                            <td>Store Code</td>
+                            <td>Window</td>
+                            <td>Entry Time</td>
+                            <td>Exit Time</td>
                         </tr>
                     </thead>
     
-                    <tbody class="barlow-light">
-                        <tr>
-                            <td>1234521</td>
-                            <td>16:00-19:00</td>
-                            <td>RDD</td>
-                            <td>RDD</td>
+                    <tbody id="routeTableBody" class="barlow-light">
+
                         </tr>
-                        <tr>
-                            <td>1234521</td>
-                            <td>16:00-19:00</td>
-                            <td>RDD</td>
-                            <td>RDD</td>
-                        </tr>
-                        <tr>
-                            <td>1234521</td>
-                            <td>16:00-19:00</td>
-                            <td>RDD</td>
-                            <td>RDD</td>
-                        </tr>
-                        <tr>
-                            <td>1234521</td>
-                            <td>16:00-19:00</td>
-                            <td>RDD</td>
-                            <td>RDD</td>
-                        </tr>
-                        <tr>
-                            <td>1234521</td>
-                            <td>16:00-19:00</td>
-                            <td>RDD</td>
-                            <td>RDD</td>
-                        </tr>
-                        <tr>
-                            <td>1234521</td>
-                            <td>16:00-19:00</td>
-                            <td>RDD</td>
-                            <td>RDD</td>
-                        </tr>
-                      </tbody>
+                    </tbody>
                 </table>
             </div>
     
@@ -115,19 +81,19 @@
                     <span id="title" style="color:white" class="krona-one-regular">Menu</span>
                 </div>
 
-                <button id="options" type="button" class="my-2 d-flex justify-content-center align-items-center p-2 px-3 btn btn-light barlow-regular">
+                <button id="addRouteBtn" type="button" class="my-2 d-flex justify-content-center align-items-center p-2 px-3 btn btn-light barlow-regular">
                     <span class="me-auto pe-1"><i class="h4 bi bi-plus-square"></i></span>
                     <div class="container">
                         Add Route Info
                     </div>
                 </button>
-                <button id="options" type="button" class="my-3 d-flex justify-content-center align-items-center p-2 px-3 btn btn-light barlow-regular">
+                <button id="saveBtn" type="button" class="my-3 d-flex justify-content-center align-items-center p-2 px-3 btn btn-light barlow-regular">
                     <span class="me-auto pe-1"><i class="h4 bi bi-save"></i></span>
                     <div class="container">
                         Save as .txt file
                     </div>
                 </button>
-                <button id="options" type="button" class="my-3 d-flex justify-content-center align-items-center p-2 px-3 btn btn-light barlow-regular">
+                <button id="exitBtn" type="button" class="my-3 d-flex justify-content-center align-items-center p-2 px-3 btn btn-light barlow-regular">
                     <span class="me-auto pe-1"><i class="h4 bi bi-escape"></i></span>
                     <div class="container">
                         Exit to Menu
@@ -135,14 +101,14 @@
                 </button>
             </div>
         </div>
-        
     </div>
     
     <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"
-  ></script>
-  <script src="../renderer.js"></script>
+    ></script>
+    <script src="../renderer.js"></script>
+    <script src="script.js"></script> <!-- Add this line to link your script -->
 </body>
 </html>
