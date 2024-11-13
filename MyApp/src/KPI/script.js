@@ -1,5 +1,7 @@
 // Assuming that the HTML structure has these IDs
+
 document.addEventListener("DOMContentLoaded", () => {
+    
     const addRouteBtn = document.getElementById("addRouteBtn");
     const saveBtn = document.getElementById("saveBtn");
     const exitBtn = document.getElementById("exitBtn");
@@ -7,20 +9,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const missCount = document.getElementById("missCount");
     const hmRatio = document.getElementById("hmRatio");
     const routeTable = document.getElementById("routeTableBody");
+    const dateElement = document.getElementById('date');
+    const currentDate = new Date().toLocaleDateString();
+    dateElement.textContent = currentDate;
 
-    let hits = 12; // Initial value based on your example
-    let misses = 55; // Initial value based on your example
+    let hits = 0; // Initial value based on your example
+    let misses = 0; // Initial value based on your example
+
 
     // Update Hit/Miss Ratio
     function updateHmRatio() {
         let ratio = (hits / (hits + misses)) * 100;
         hmRatio.innerText = `${ratio.toFixed(2)}%`;
     }
-
+/*
     // Function to add a new route row
     function addRouteRow() {
         const newRow = document.createElement("tr");
-
+        
         // Example data for each cell
         const storeCodeCell = document.createElement("td");
         storeCodeCell.innerText = "1234521";
@@ -48,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
         hitCount.innerText = hits;
         updateHmRatio();
     }
+*/
 
     // Function to save table data as .txt file
     function saveAsTxt() {
