@@ -139,7 +139,7 @@ const createWindow = () => {
             ID: route.ID
         }));
         console.log('Routes stored:', routesData);
-        //event.sender.send('send-routes', routesData);
+       
 
     });
 
