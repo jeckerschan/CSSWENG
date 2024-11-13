@@ -2,13 +2,13 @@ const { send } = window.electronAPI;
 
 let currentSeq = 1;  
 let currentId = 1;   
-
+const savedRoutes = JSON.parse(localStorage.getItem('log-routes')) || [];
+console.log(savedRoutes);
 
 function createRoute(formData, copies = 1, isNewRoute = true) {
     const routes = [];
     const routeSeq = isNewRoute ? currentSeq++ : currentSeq;  
 
-    
     for (let i = 0; i < copies; i++) {
         const route = {
             sysRoute: formData.sysRoute,
@@ -17,7 +17,7 @@ function createRoute(formData, copies = 1, isNewRoute = true) {
             drop: formData.drop,
             finRoute: formData.finRoute,
             strCode: formData.strCode,
-            sysRouteAmt:formData.sysRouteAmt,
+            sysRouteAmt: formData.sysRouteAmt,
             Mix: formData.Mix,
             window: formData.window,
             weightUtil: formData.weightUtil,
@@ -35,8 +35,13 @@ function createRoute(formData, copies = 1, isNewRoute = true) {
         routes.push(route);
     }
 
-    
-    send('log-routes', routes);
+    const updatedRoutes = savedRoutes.concat(routes);
+    send('log-routes', updatedRoutes);
+    localStorage.setItem('log-routes', JSON.stringify(updatedRoutes));
+    localStorage.setItem('formData', JSON.stringify(formData));
+    let allRoutes = JSON.parse(localStorage.getItem('all-routes')) || [];
+    allRoutes = allRoutes.concat(routes);
+    localStorage.setItem('all-routes', JSON.stringify(allRoutes));
     send('navigate-to-edit');
 }
 

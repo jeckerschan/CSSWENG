@@ -115,6 +115,18 @@ const createWindow = () => {
         }
     });
 
+    ipcMain.handle('clear-local-storage', async (event) => {
+        try {
+            const mainWindow = BrowserWindow.getAllWindows()[0];
+            await mainWindow.webContents.executeJavaScript('localStorage.clear();');
+            return { success: true };
+        } catch (error) {
+            console.error('Error clearing local storage:', error);
+            return { success: false, error: error.message };
+        }
+    });
+
+    
     ipcMain.on('log-routes', (event, routes) => {
         routesData = routes.map((route, index) => ({
             sysRoute: route.sysRoute,

@@ -16,29 +16,30 @@ document.addEventListener("DOMContentLoaded", () => {
     let hits = 0; // Initial value based on your example
     let misses = 0; // Initial value based on your example
 
+    const savedRoutes = JSON.parse(localStorage.getItem('log-routes')) || [];
+    console.log(savedRoutes);
 
     // Update Hit/Miss Ratio
     function updateHmRatio() {
         let ratio = (hits / (hits + misses)) * 100;
         hmRatio.innerText = `${ratio.toFixed(2)}%`;
     }
-/*
-    // Function to add a new route row
-    function addRouteRow() {
+// Function to add a new route row
+function addRouteRow(data) {
+    data.forEach(route => {
         const newRow = document.createElement("tr");
-        
-        // Example data for each cell
+
         const storeCodeCell = document.createElement("td");
-        storeCodeCell.innerText = "1234521";
-        
+        storeCodeCell.innerText = route.strCode;
+
         const windowCell = document.createElement("td");
-        windowCell.innerText = "16:00-19:00";
-        
+        windowCell.innerText = route.window;
+
         const entryTimeCell = document.createElement("td");
-        entryTimeCell.innerText = "RDD";
-        
+        entryTimeCell.innerText = ""; // Blank cell for entry time
+
         const exitTimeCell = document.createElement("td");
-        exitTimeCell.innerText = "RDD";
+        exitTimeCell.innerText = ""; // Blank cell for exit time
 
         // Append cells to the row
         newRow.appendChild(storeCodeCell);
@@ -53,8 +54,13 @@ document.addEventListener("DOMContentLoaded", () => {
         hits++;
         hitCount.innerText = hits;
         updateHmRatio();
-    }
-*/
+    });
+}
+// Load saved routes from localStorage on page load
+if (savedRoutes.length > 0) {
+    addRouteRow(savedRoutes);
+}
+
 
     // Function to save table data as .txt file
     function saveAsTxt() {

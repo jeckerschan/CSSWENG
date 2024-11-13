@@ -1,5 +1,5 @@
 
-
+window.localStorage.clear();
 const registerLink = document.getElementById('register-link');
 document.addEventListener('DOMContentLoaded', () => {
     console.log('electronAPI:', window.electronAPI); 
