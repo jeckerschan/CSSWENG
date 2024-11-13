@@ -1,6 +1,7 @@
 // Load environment variables from the .env file
 require('dotenv').config({ path: 'database.env' });
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
+const fs = require('fs');
 const { MongoClient } = require('mongodb');
 const bcrypt = require('bcrypt');
 const path = require('path');
@@ -138,6 +139,8 @@ const createWindow = () => {
             ID: route.ID
         }));
         console.log('Routes stored:', routesData);
+        //event.sender.send('send-routes', routesData);
+
     });
 
     ipcMain.on('request-route-amount', (event) => {
@@ -147,6 +150,26 @@ const createWindow = () => {
     ipcMain.on('get-routes', (event) => {
         event.sender.send('routes-data', routesData);
     });
+
+    ipcMain.handle('saveCSV', async (event, csvContent) => {
+    const { filePath } = await dialog.showSaveDialog({
+        title: 'Save Routes Data',
+        defaultPath: path.join(app.getPath('desktop'), 'route_data.csv'),
+        filters: [{ name: 'CSV Files', extensions: ['csv'] }]
+    });
+
+    if (filePath) {
+        try {
+            fs.writeFileSync(filePath, csvContent, 'utf-8');
+            console.log("File saved successfully!");
+            return { success: true };
+        } catch (error) {
+            console.error("Error saving file:", error);
+            return { success: false, error: error.message };
+        }
+    }
+    return { success: false, error: 'No file path selected' };
+});
 
 
 // This method will be called when Electron has finished initialization

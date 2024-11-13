@@ -8,7 +8,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
     on: (channel, func) => ipcRenderer.on(channel, (event, ...args) => func(...args)),
     invoke: (channel, ...args) => ipcRenderer.invoke(channel, ...args),
     connectToDatabase: () => ipcRenderer.invoke('connect-to-database'),
-    loginAttempt: (email, password) => ipcRenderer.invoke('login-attempt', email, password)
+    loginAttempt: (email, password) => ipcRenderer.invoke('login-attempt', email, password),
+    saveCSV: (csvContent) => ipcRenderer.invoke('saveCSV', csvContent) 
+
 });
 
 console.log('Preload script loaded');

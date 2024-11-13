@@ -1,6 +1,7 @@
-const { send, on } = window.electronAPI;
+const { send, on, saveCSV } = window.electronAPI;
 
 on('routes-data', (routes) => {
+    routeData = routes;
     populateTable(routes);
 });
 
@@ -41,4 +42,24 @@ function populateTable(data) {
 }
 
 
+
+
 send('get-routes');
+
+function convertToCSV(data) {
+    const headers = ["RDD", "Plant", "Sys Route", "Fin Route", "Sale Order", "Out Deliveries", "Str Code", "SEQ", "Customer Name", "Volume", "Weight", "Ton", "Load Date", "Mix", "Call Time", "Window", "Drop", "Weight Util"];
+    const rows = data.map(route => [
+        route.rdd, route.Plant, route.sysRoute, route.finRoute, route.saleOrder, 
+        route.outDevlieries, route.strCode, route.SEQ, route.customerName, 
+        route.volume, route.Weight, route.Ton, route.loadDate, route.Mix, 
+        route.callTime, route.window, route.drop, route.weightUtil
+    ]);
+
+    return [headers.join(","), ...rows.map(row => row.join(","))].join("\n");
+}
+
+document.getElementById("Save").addEventListener("click", () => {
+    console.log("clicked button");
+    const csvContent = convertToCSV(routeData);
+    window.electronAPI.saveCSV(csvContent);
+});
