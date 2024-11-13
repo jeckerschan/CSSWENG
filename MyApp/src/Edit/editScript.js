@@ -63,3 +63,7 @@ document.getElementById("Save").addEventListener("click", () => {
     const csvContent = convertToCSV(routeData);
     window.electronAPI.saveCSV(csvContent);
 });
+
+document.getElementById("kpi").addEventListener("click", () => {
+    send('navigate-to-kpi');
+});
