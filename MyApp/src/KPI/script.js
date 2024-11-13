@@ -47,13 +47,19 @@ function addRouteRow(data) {
         newRow.appendChild(entryTimeCell);
         newRow.appendChild(exitTimeCell);
 
+        const entryTimeInput = document.createElement("input");
+        entryTimeInput.type = "number";
+        entryTimeInput.placeholder = "Enter time";
+        entryTimeCell.appendChild(entryTimeInput);
+
+        const exitTimeInput = document.createElement("input");
+        exitTimeInput.type = "number";
+        exitTimeInput.placeholder = "Enter time";
+        exitTimeCell.appendChild(exitTimeInput);
+
         // Append row to table body
         routeTable.appendChild(newRow);
 
-        // Increase hit count and update ratio
-        hits++;
-        hitCount.innerText = hits;
-        updateHmRatio();
     });
 }
 // Load saved routes from localStorage on page load
@@ -83,12 +89,58 @@ if (savedRoutes.length > 0) {
     }
 
     // Event Listeners
-    addRouteBtn.addEventListener("click", addRouteRow);
     saveBtn.addEventListener("click", saveAsTxt);
     exitBtn.addEventListener("click", () => {
         window.location.href = "../../src/Home/home.html"; 
     });
+    
+        exitTimeInput.addEventListener("change", () => {
+            const exitTime = exitTimeInput.value;
+            const windowTime = route.window;
 
+            if (exitTime <= windowTime) {
+            exitTimeInput.style.borderColor = "green";
+            hits++;
+            hitCount.innerText = hits;
+            updateHmRatio();
+            } else {
+            exitTimeInput.style.borderColor = "red";
+            misses++;
+            missCount.innerText = misses;
+            updateHmRatio();
+            }
+        });
+        // Function to adjust hit and miss count
+        function adjustHitMissCount() {
+            const rows = routeTable.getElementsByTagName("tr");
+            hits = 0;
+            misses = 0;
+
+            for (let row of rows) {
+                const exitTimeInput = row.cells[3].querySelector("input");
+                const windowTime = parseInt(row.cells[1].innerText);
+
+                if (exitTimeInput && exitTimeInput.value !== "") {
+                    const exitTime = parseInt(exitTimeInput.value);
+                    if (exitTime <= windowTime) {
+                        hits++;
+                    } else {
+                        misses++;
+                    }
+                }
+            }
+
+            hitCount.innerText = hits;
+            missCount.innerText = misses;
+            updateHmRatio();
+        }
+
+        // Add event listener to adjust hit/miss count on input change
+        routeTable.addEventListener("input", (event) => {
+            if (event.target.tagName === "INPUT" && event.target.type === "number") {
+                adjustHitMissCount();
+            }
+        });
     // Initialize Hit/Miss Ratio display
     hitCount.innerText = hits;
     missCount.innerText = misses;
