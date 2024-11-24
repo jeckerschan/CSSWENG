@@ -67,3 +67,7 @@ document.getElementById("Save").addEventListener("click", () => {
 document.getElementById("kpi").addEventListener("click", () => {
     send('navigate-to-kpi');
 });
+
+document.getElementById("add").addEventListener("click", () => {
+    send('navigate-to-create');
+});

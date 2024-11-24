@@ -1,13 +1,13 @@
 const { send } = window.electronAPI;
 
-//let currentSeq = 1;  
+
 let currentId = 1;   
 const savedRoutes = JSON.parse(localStorage.getItem('log-routes')) || [];
 console.log(savedRoutes);
 
 function createRoute(formData, copies = 1, isNewRoute = true) {
     const routes = [];
-    //const routeSeq = isNewRoute ? currentSeq++ : currentSeq;  
+   ;  
 
     for (let i = 0; i < copies; i++) {
         const route = {
