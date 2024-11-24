@@ -1,13 +1,13 @@
 const { send } = window.electronAPI;
 
-let currentSeq = 1;  
+//let currentSeq = 1;  
 let currentId = 1;   
 const savedRoutes = JSON.parse(localStorage.getItem('log-routes')) || [];
 console.log(savedRoutes);
 
 function createRoute(formData, copies = 1, isNewRoute = true) {
     const routes = [];
-    const routeSeq = isNewRoute ? currentSeq++ : currentSeq;  
+    //const routeSeq = isNewRoute ? currentSeq++ : currentSeq;  
 
     for (let i = 0; i < copies; i++) {
         const route = {
@@ -29,7 +29,7 @@ function createRoute(formData, copies = 1, isNewRoute = true) {
             Weight: formData.Weight,
             Ton: formData.Ton,
             loadDate: formData.loadDate,
-            SEQ: routeSeq,           
+            SEQ: formData.SEQe,           
             ID: currentId++           
         };
         routes.push(route);
@@ -67,6 +67,7 @@ document.getElementById('save').addEventListener('click', (event) => {
         volume: document.getElementById('volume').value,
         Weight: document.getElementById('Weight').value,
         Ton: document.getElementById('Ton').value,
+        SEQe: document.getElementById('SEQe').value,
         loadDate: document.getElementById('loadDate').value,
     };
 
