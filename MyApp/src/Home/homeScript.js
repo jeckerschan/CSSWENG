@@ -3,9 +3,13 @@ const { send } = window.electronAPI;
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Home script loaded. electronAPI:', window.electronAPI); 
 
-    const loadPlanBtn = document.getElementById('loadPlanBtn');
+    // Load current routes from localStorage and log them
+    const savedRoutes = JSON.parse(localStorage.getItem('log-routes')) || [];
+    console.log('Current Routes:', savedRoutes);
 
- 
+    const loadPlanBtn = document.getElementById('loadPlanBtn');
+    const current = document.getElementById('current');
+
     if (loadPlanBtn) {
         loadPlanBtn.addEventListener('click', (event) => {
             event.preventDefault(); 
@@ -20,4 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.error('Load Plan button not found');
     }
+
+   
 });

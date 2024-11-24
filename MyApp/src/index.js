@@ -39,6 +39,7 @@ const createWindow = () => {
             enableRemoteModule: false,
             nodeIntegration: false,
             contextBridge: true,
+            focusable: true,
             preload: path.join(__dirname, 'preload.js'), 
         },
     });
@@ -162,6 +163,14 @@ const createWindow = () => {
 
     ipcMain.on('get-routes', (event) => {
         event.sender.send('routes-data', routesData);
+    });
+
+    ipcMain.on('update-route', (event, updatedRoute) => {
+        const index = routesData.findIndex(route => route.ID === updatedRoute.ID);
+        if (index !== -1) {
+            routesData[index] = updatedRoute; // Update the route in memory
+            console.log(`Route with ID ${updatedRoute.ID} updated`, updatedRoute);
+        }
     });
 
     ipcMain.handle('saveCSV', async (event, csvContent) => {

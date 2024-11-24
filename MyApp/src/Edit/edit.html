@@ -34,7 +34,7 @@
     <div id="navbar"></div>
 
     <div class="container-fluid bg-white d-flex justify-content-center p-3 border border-2">
-        <span id="filename" class="krona-one-regular">FILENAME.xlsx</span>
+        <span id="filename" class="krona-one-regular"></span>
     </div>
 
     <div style="height:800px" class="rounded-2 bg-light table-responsive">
@@ -53,13 +53,8 @@
                     <th scope="col">Customer Name</th>
                     <th scope="col">Vol</th>
                     <th scope="col">Weight</th>
-                    <th scope="col">TON</th>
-                    <th scope="col">LOADDATE</th>
-                    <th scope="col">MIX</th>
-                    <th scope="col">CALL TIME</th>
                     <th scope="col">Window</th>
                     <th scope="col">DROP</th>
-                    <th scope="col">Weight Utilization</th>
                 </tr>
             </thead>
             <tbody id="route-table-body" class="barlow-light">
@@ -69,9 +64,6 @@
 
     <div class="d-flex justify-content-between p-0 mx-4 mt-3">
         <div class="d-flex gap-3 justify-content-end">
-            <button id="options" data-bs-toggle="modal" data-bs-target="#filter-options" class="p-2 px-3 btn btn-light barlow-regular">
-                Edit Existing Routes
-            </button>
             <button id="add" data-bs-toggle="modal" data-bs-target="#filter-options" class="p-2 px-3 btn btn-light barlow-regular">
                 Add Routes
             </button>
@@ -81,9 +73,9 @@
         </div>
 
         <div class="d-flex justify-content-start">
-            <button id="Save" type="button" class="btn btn-light">
+            <button id="Confirm" type="button" class="btn btn-light">
                 <i class="me-1 bi bi-floppy"></i>
-                Save File</button>
+                Confirm Details</button>
         </div>
     </div>
 
