@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css"/>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <!-- Include this for navbar -->
+    <script>
+        function loadNavbar() {
+            fetch('../../assets/navbar/navbar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('navbar').innerHTML = data;
+                });
+        }
+        window.onload = loadNavbar;
+      </script>
+
+    <title>Edit Load Plan</title>
+</head>
+<body>
+    <div id="navbar"></div>
+
+    <div class="container-fluid bg-white d-flex justify-content-center p-3 border border-2">
+        <span id="filename" class="krona-one-regular"></span>
+    </div>
+
+    <div style="height:800px" class="rounded-2 bg-light table-responsive">
+        <table class="table align-middle text-center table-hover table-bordered">
+            <thead class="barlow-regular align-middle table-dark">
+                <tr>
+                    <th colspan="2" scope="col"></th>
+                    <th scope="col">RDD</th>
+                    <th scope="col">Plant</th>
+                    <th scope="col">System Route</th>
+                    <th scope="col">Final Route</th>
+                    <th scope="col">Sales Order</th>
+                    <th scope="col">Outbound Deliveries</th>
+                    <th scope="col">Store Code</th>
+                    <th scope="col">SEQ</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Vol</th>
+                    <th scope="col">Weight</th>
+                    <th scope="col">Window</th>
+                    <th scope="col">DROP</th>
+                    <th scope="col">Load Date</th>
+                    <th scope="col">Mix</th>
+                    <th scope="col">Call Time</th>
+                    <th scope="col">Weight Util</th>
+
+                </tr>
+            </thead>
+            <tbody id="route-table-body" class="barlow-light">
+
+            </tbody>
+                
+
+    <div class="d-flex justify-content-between p-0 mx-4 mt-3">
+        <div class="d-flex gap-3 justify-content-end">
+            <button id="kpi" data-bs-toggle="modal" data-bs-target="#filter-options" class="p-2 px-3 btn btn-light barlow-regular">
+                KPI Analysis
+            </button>
+        </div>
+
+        <div class="d-flex justify-content-start">
+            <button id="Confirm" type="button" class="btn btn-light">
+                <i class="me-1 bi bi-floppy"></i>
+                Confirm Details</button>
+        </div>
+    </div>
+
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
+  <script src="finalEditScript.js"></script>
+</body>
+</html>

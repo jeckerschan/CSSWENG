@@ -79,6 +79,11 @@ const createWindow = () => {
     const webContents = event.sender; 
     webContents.loadFile(path.join(__dirname, './Create/create.html'));
   });
+  ipcMain.on('navigate-to-finalEdit', (event) => {
+    const webContents = event.sender; 
+    webContents.loadFile(path.join(__dirname, './FinalizeEdit/finalEdit.html'));
+  });
+
 
 
 
@@ -158,6 +163,19 @@ const createWindow = () => {
         console.log('Routes stored:', routesData);
        
 
+    ipcMain.on('log-updated-route', (event, updatedRoutes) => {
+    updatedRoutes.forEach(updatedRoute => {
+        const index = routesData.findIndex(route => route.ID === updatedRoute.ID);
+        if (index !== -1) {
+            routesData[index] = updatedRoute; // Update the route in memory
+            console.log(`Route with ID ${updatedRoute.ID} updated:`, updatedRoute);
+        } else {
+            console.log(`Route with ID ${updatedRoute.ID} not found for update.`);
+        }
+    });
+
+    console.log('All updated routes have been logged.');
+});    
     });
 
     ipcMain.on('request-route-amount', (event) => {

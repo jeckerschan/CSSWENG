@@ -24,7 +24,13 @@ function createRoute(formData, copies = 1, isNewRoute = true) {
             volume: formData.volume,
             Weight: formData.Weight,
             SEQ: formData.SEQe,           
-            ID: currentId++  
+            ID: currentId++,
+            ton: "ton",
+            loaddate : "loaddate ",
+            mix : "Null",
+            calltime : "Null",
+            weightUtilization : "Null"
+            
         };
         routes.push(route);
     }
