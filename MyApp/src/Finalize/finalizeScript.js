@@ -38,6 +38,17 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('SEQ dropdown not found in the DOM.');
         return;
     }
+    seqDropdown.addEventListener('blur', function () {
+        const selectedSeq = seqDropdown.value;
+
+        if (!selectedSeq) {
+            console.error('No SEQ selected.');
+            return;
+        }
+
+        
+        calculateTotalVolumeAndWeight(selectedSeq);
+    });
 
     saveButton.addEventListener('click', function (event) {
         event.preventDefault();
@@ -68,7 +79,22 @@ document.addEventListener('DOMContentLoaded', function () {
         send('navigate-to-finalEdit');
     });
 });
+function calculateTotalVolumeAndWeight(selectedSeq) {
+    const routesForSeq = savedRoutes.filter(route => route.SEQ == selectedSeq);
+    
+    let totalVolume = 0;
+    let totalWeight = 0;
 
+    // Sum up the volume and weight for the filtered routes
+    routesForSeq.forEach(route => {
+        totalVolume += parseFloat(route.volume) || 0;  // Assuming 'volume' is the field for volume
+        totalWeight += parseFloat(route.weight) || 0;    // Assuming 'ton' is the field for weight
+    });
+
+    // Update the table with total volume and total weight
+    document.getElementById('totalVolume').textContent = totalVolume.toFixed(2); // Display up to 2 decimal points
+    document.getElementById('totalWeight').textContent = totalWeight.toFixed(2);  // Display up to 2 decimal points
+}
 function populateSeqDropdown(routes) {
     const uniqueSeqs = removeDuplicateSeq(routes);
     uniqueSeqs.forEach(seq => {
@@ -80,7 +106,7 @@ function populateSeqDropdown(routes) {
 }
 
 function removeDuplicateSeq(routes) {
-    const tempArray = [];
+    const tempArray = [0];
     routes.forEach(route => {
         if (!tempArray.includes(route.SEQ)) {
             tempArray.push(route.SEQ);
@@ -93,6 +119,35 @@ function removeDuplicateSeq(routes) {
 populateSeqDropdown(savedRoutes);
 console.log('Unique SEQs:', removeDuplicateSeq(savedRoutes));
 
+function populateTableBySeq(selectedSeq) {
+    const routesForSeq = savedRoutes.filter(route => route.SEQ == selectedSeq);
+    const tableBody = document.getElementById('routesTableBody');
 
+    // Clear existing table rows
+    tableBody.innerHTML = '';
 
+    routesForSeq.forEach(route => {
+        const row = document.createElement('tr');
 
+        const volumeCell = document.createElement('td');
+        volumeCell.textContent = route.volume;
+        row.appendChild(volumeCell);
+
+        const weightCell = document.createElement('td');
+        weightCell.textContent = route.weight;
+        row.appendChild(weightCell);
+
+        tableBody.appendChild(row);
+    });
+}
+
+seqDropdown.addEventListener('blur', function () {
+    const selectedSeq = seqDropdown.value;
+
+    if (!selectedSeq) {
+        console.error('No SEQ selected.');
+        return;
+    }
+
+    populateTableBySeq(selectedSeq);
+});
