@@ -89,19 +89,16 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Finalized Data:', data);
     });
 });
-
 function populateSeqDropdown(routes) {
-    routes.forEach(route => {
-
+    const uniqueSeqs = removeDuplicateSeq(routes);
+    uniqueSeqs.forEach(seq => {
         const option = document.createElement('option');
-        option.value = route.SEQ;
-        option.textContent = `SEQ ${route.SEQ}`;
-        console.log(`SEQ ${route.SEQ}`);
+        option.value = seq;
+        option.textContent = `SEQ ${seq}`;
+        console.log(`SEQ ${seq}`);
         seqDropdown.appendChild(option);
     });
 }
-
-populateSeqDropdown(uniqueSeqs);
 
 function removeDuplicateSeq(routes) {
     const tempArray = [];
@@ -113,7 +110,6 @@ function removeDuplicateSeq(routes) {
     return tempArray;
 }
 
-const uniqueSeqs = removeDuplicateSeq(savedRoutes);
-console.log('Unique SEQs:', uniqueSeqs);
-        
+populateSeqDropdown(savedRoutes);
+console.log('Unique SEQs:', removeDuplicateSeq(savedRoutes));
 
