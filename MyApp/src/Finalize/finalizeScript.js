@@ -5,17 +5,6 @@ const savedRoutes = JSON.parse(localStorage.getItem('log-routes')) || [];
 console.log('Loaded saved routes:', savedRoutes);
 const seqDropdown = document.getElementById('seq');
 
-function populateSeqDropdown(routes) {
-    routes.forEach(route => {
-        const option = document.createElement('option');
-        option.value = route.ID;
-        option.textContent = `SEQ ${route.ID}`;
-        seqDropdown.appendChild(option);
-    });
-}
-
-populateSeqDropdown(savedRoutes);
-
 function createRoute(formData, copies = 1, isNewRoute = true) {
     const routes = [];
   
@@ -93,3 +82,14 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('Finalized Data:', data);
     });
 });
+
+function populateSeqDropdown(routes) {
+    routes.forEach(route => {
+        const option = document.createElement('option');
+        option.value = route.ID;
+        option.textContent = `SEQ ${route.ID}`;
+        seqDropdown.appendChild(option);
+    });
+}
+
+populateSeqDropdown(savedRoutes);

@@ -47,7 +47,10 @@ const createWindow = () => {
     
     mainWindow.loadFile(path.join(__dirname, './Login/login.html'));
 
-  
+  ipcMain.on('navigate-to-finalize', (event) => {
+    const webContents = event.sender; 
+    webContents.loadFile(path.join(__dirname, './Finalize/finalize.html'));
+  });
   ipcMain.on('navigate-to-register', (event) => {
     const webContents = event.sender; 
     webContents.loadFile(path.join(__dirname, './Register/register.html'));

@@ -104,5 +104,5 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.getElementById("Confirm").addEventListener("click", () => {
-    send('navigate-to-menu');
+    send('navigate-to-finalize');
 });
