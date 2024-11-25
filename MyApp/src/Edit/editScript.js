@@ -33,7 +33,7 @@ function populateTable(data) {
             <td contenteditable="true">${route.SEQ || ''}</td>
             <td contenteditable="true">${route.customerName || ''}</td>
             <td contenteditable="true">${route.volume || ''}</td>
-            <td contenteditable="true">${route.Weight || ''}</td>
+            <td contenteditable="true">${route.weight || ''}</td>
             <td contenteditable="true">${route.windowStart + "-" + route.windowEnd || ''}</td>
             <td contenteditable="true">${route.drop || ''}</td>
         `;
@@ -59,7 +59,7 @@ function populateTable(data) {
                 SEQ: cells[8]?.textContent.trim() || '',
                 customerName: cells[9]?.textContent.trim() || '',
                 volume: cells[10]?.textContent.trim() || '',
-                Weight: cells[11]?.textContent.trim() || '',
+                weight: cells[11]?.textContent.trim() || '',
                 windowStart: cells[12]?.textContent.split('-')[0]?.trim() || '',
                 windowEnd: cells[12]?.textContent.split('-')[1]?.trim() || '',
                 drop: cells[13]?.textContent.trim() || ''

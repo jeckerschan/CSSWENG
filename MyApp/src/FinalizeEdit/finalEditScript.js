@@ -33,7 +33,7 @@ function populateTable(data) {
             <td contenteditable="true">${route.SEQ || ''}</td>
             <td contenteditable="true">${route.customerName || ''}</td>
             <td contenteditable="true">${route.volume || ''}</td>
-            <td contenteditable="true">${route.Weight || ''}</td>
+            <td contenteditable="true">${route.weight || ''}</td>
             <td contenteditable="true">${route.ton || ''}</td>
             <td contenteditable="true">${route.windowStart + "-" + route.windowEnd || ''}</td>
             <td contenteditable="true">${route.drop || ''}</td>
@@ -65,15 +65,15 @@ function populateTable(data) {
                 SEQ: cells[8]?.textContent.trim() || '',
                 customerName: cells[9]?.textContent.trim() || '',
                 volume: cells[10]?.textContent.trim() || '',
-                Weight: cells[11]?.textContent.trim() || '',
-                Weight: cells[12]?.textContent.trim() || '',
+                weight: cells[11]?.textContent.trim() || '',
+                ton: cells[12]?.textContent.trim() || '',
                 windowStart: cells[13]?.textContent.split('-')[0]?.trim() || '',
-                windowEnd: cells[14]?.textContent.split('-')[1]?.trim() || '',
-                drop: cells[15]?.textContent.trim() || '',
-                loaddate: cells[16]?.textContent.trim() || '',
-                mix: cells[17]?.textContent.trim() || '',
-                calltime: cells[18]?.textContent.trim() || '',
-                weightUtilization: cells[19]?.textContent.trim() || ''
+                windowEnd: cells[13]?.textContent.split('-')[1]?.trim() || '',
+                drop: cells[14]?.textContent.trim() || '',
+                loaddate: cells[15]?.textContent.trim() || '',
+                mix: cells[16]?.textContent.trim() || '',
+                calltime: cells[17]?.textContent.trim() || '',
+                weightUtilization: cells[18]?.textContent.trim() || ''
 
             };
 
@@ -88,6 +88,9 @@ function populateTable(data) {
 
           
                 send('update-route', updatedRoute);
+                document.getElementById("Confirm").addEventListener("click", () => {
+                    convertToCSV(updatedRoute);
+                });
             }
         });
     });
@@ -104,9 +107,7 @@ document.getElementById("kpi").addEventListener("click", () => {
     send('navigate-to-kpi');
 });
 
-document.getElementById("add").addEventListener("click", () => {
-    send('navigate-to-create');
-});
+
 
 document.addEventListener("DOMContentLoaded", () => {
     const filenameElement = document.getElementById("filename");
@@ -115,6 +116,63 @@ document.addEventListener("DOMContentLoaded", () => {
     filenameElement.textContent = `${formattedDate} LOAD PLAN`;
 });
 
-document.getElementById("Confirm").addEventListener("click", () => {
-    send('navigate-to-finalize');
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+
+function convertToCSV(data) {
+    const headers = [
+        "RDD", 
+        "Plant", 
+        "Sys Route", 
+        "Fin Route", 
+        "Sale Order", 
+        "Out Deliveries", 
+        "Str Code", 
+        "SEQ", 
+        "Customer Name", 
+        "Volume", 
+        "Weight", 
+        "Ton", 
+        "Load Date", 
+        "Mix", 
+        "Call Time", 
+        "WindowStart", 
+        "WindowEnd", 
+        "Drop", 
+        "Weight Util"];
+    const rows = data.map(route => [
+        route.rdd, 
+        route.Plant, 
+        route.sysRoute, 
+        route.finRoute, 
+        route.saleOrder, 
+        route.outDevlieries, 
+        route.strCode, 
+        route.SEQ, 
+        route.customerName, 
+        route.volume, 
+        route.weight, 
+        route.ton, 
+        route.loaddate, 
+        route.mix, 
+        route.calltime, 
+        route.windowStart, 
+        route.windowEnd, 
+        route.drop, 
+        route.weightUtilization
+    ]);
+
+    return [headers.join(","), ...rows.map(row => row.join(","))].join("\n");
+}
+
+document.getElementById("Save").addEventListener("click", () => {
+    console.log("clicked button");
+    const csvContent = convertToCSV(routeData);
+    window.electronAPI.saveCSV(csvContent);
 });
+
+// Add a button listener to export the routes
+document.getElementById("export-csv").addEventListener("click", convertToCSV);
+

@@ -20,7 +20,6 @@ function updateRoutesBySeq(selectedSeq, formData) {
         route.loaddate = formData.loaddate;
         route.mix = formData.mix;
         route.calltime = formData.calltime;
-        route.drop = formData.drop;
         route.weightUtilization = formData.weightUtilization;
     });
 
@@ -48,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const ton = document.getElementById('ton').value;
         const loaddate = document.getElementById('loaddate').value;
         const mix = document.getElementById('mix').value;
-        const calltime = document.getElementById('callTime').value;
+        const calltime = document.getElementById('calltime').value;
         const weightUtilization = document.getElementById('weightUtilization')?.value || 0;
         console.log('Form data:', { selectedSeq, ton, loaddate, mix, calltime, weightUtilization });
 

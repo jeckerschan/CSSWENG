@@ -22,11 +22,11 @@ function createRoute(formData, copies = 1, isNewRoute = true) {
             outDevlieries: formData.outDevlieries,
             customerName: formData.customerName,
             volume: formData.volume,
-            Weight: formData.Weight,
+            weight: formData.weight,
             SEQ: formData.SEQe,           
             ID: currentId++,
-            ton: "ton",
-            loaddate : "loaddate ",
+            ton: "Null",
+            loaddate : "Null ",
             mix : "Null",
             calltime : "Null",
             weightUtilization : "Null"
@@ -66,7 +66,7 @@ document.getElementById('save').addEventListener('click', (event) => {
         outDevlieries: document.getElementById('outDevlieries').value,
         customerName: document.getElementById('customerName').value,
         volume: document.getElementById('volume').value,
-        Weight: document.getElementById('Weight').value,
+        weight: document.getElementById('weight').value,
         SEQe: document.getElementById('SEQe').value,
     };
 
