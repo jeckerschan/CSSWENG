@@ -145,7 +145,7 @@ const createWindow = () => {
             callTime: route.callTime,
             strCode: route.strCode,
             sysRouteAmt: route.sysRouteAmt,
-            Mix: route.Mix,
+            mix: route.mix,
             windowStart: route.windowStart,
             windowEnd:route.windowEnd,
             weightUtil: route.weightUtil,
@@ -155,9 +155,10 @@ const createWindow = () => {
             customerName: route.customerName,
             volume: route.volume,
             Weight: route.Weight,
-            Ton: route.Ton,
-            loadDate: route.loadDate,
+            Ton: route.ton,
+            loadDate: route.loaddate,
             SEQ: route.SEQ,
+            weightUtilization: route.weightUtilization,
             ID: route.ID
         }));
         console.log('Routes stored:', routesData);

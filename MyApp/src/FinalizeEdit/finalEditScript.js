@@ -34,6 +34,7 @@ function populateTable(data) {
             <td contenteditable="true">${route.customerName || ''}</td>
             <td contenteditable="true">${route.volume || ''}</td>
             <td contenteditable="true">${route.Weight || ''}</td>
+            <td contenteditable="true">${route.ton || ''}</td>
             <td contenteditable="true">${route.windowStart + "-" + route.windowEnd || ''}</td>
             <td contenteditable="true">${route.drop || ''}</td>
             <td contenteditable="true">${route.loaddate || ''}</td>
@@ -65,13 +66,14 @@ function populateTable(data) {
                 customerName: cells[9]?.textContent.trim() || '',
                 volume: cells[10]?.textContent.trim() || '',
                 Weight: cells[11]?.textContent.trim() || '',
-                windowStart: cells[12]?.textContent.split('-')[0]?.trim() || '',
-                windowEnd: cells[12]?.textContent.split('-')[1]?.trim() || '',
-                drop: cells[13]?.textContent.trim() || '',
-                loaddate: cells[14]?.textContent.trim() || '',
-                mix: cells[15]?.textContent.trim() || '',
-                calltime: cells[16]?.textContent.trim() || '',
-                weightUtilization: cells[17]?.textContent.trim() || ''
+                Weight: cells[12]?.textContent.trim() || '',
+                windowStart: cells[13]?.textContent.split('-')[0]?.trim() || '',
+                windowEnd: cells[14]?.textContent.split('-')[1]?.trim() || '',
+                drop: cells[15]?.textContent.trim() || '',
+                loaddate: cells[16]?.textContent.trim() || '',
+                mix: cells[17]?.textContent.trim() || '',
+                calltime: cells[18]?.textContent.trim() || '',
+                weightUtilization: cells[19]?.textContent.trim() || ''
 
             };
 
