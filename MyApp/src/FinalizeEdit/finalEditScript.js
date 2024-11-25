@@ -107,6 +107,10 @@ document.getElementById("kpi").addEventListener("click", () => {
     send('navigate-to-kpi');
 });
 
+document.getElementById("Back").addEventListener("click", () => {
+    send('navigate-to-back');
+});
+
 
 
 document.addEventListener("DOMContentLoaded", () => {

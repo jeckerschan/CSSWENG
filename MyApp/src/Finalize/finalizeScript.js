@@ -92,3 +92,7 @@ function removeDuplicateSeq(routes) {
 // Populate the SEQ dropdown
 populateSeqDropdown(savedRoutes);
 console.log('Unique SEQs:', removeDuplicateSeq(savedRoutes));
+
+
+
+

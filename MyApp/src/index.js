@@ -83,6 +83,10 @@ const createWindow = () => {
     const webContents = event.sender; 
     webContents.loadFile(path.join(__dirname, './FinalizeEdit/finalEdit.html'));
   });
+  ipcMain.on('navigate-to-back', (event) => {
+    const webContents = event.sender; 
+    webContents.loadFile(path.join(__dirname, './Finalize/finalize.html'));
+  });
 
 
 
