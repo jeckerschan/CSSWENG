@@ -3,7 +3,14 @@ const { send } = window.electronAPI;
 let currentId = parseInt(localStorage.getItem('currentId')) || 0;  
 const savedRoutes = JSON.parse(localStorage.getItem('log-routes')) || [];
 console.log('Loaded saved routes:', savedRoutes);
+console.log('AAAAAAAAAAAAAAAAAAAAAAA');
 const seqDropdown = document.getElementById('seq');
+
+
+
+
+
+
 
 function createRoute(formData, copies = 1, isNewRoute = true) {
     const routes = [];
@@ -85,11 +92,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function populateSeqDropdown(routes) {
     routes.forEach(route => {
+
         const option = document.createElement('option');
-        option.value = route.ID;
-        option.textContent = `SEQ ${route.ID}`;
+        option.value = route.SEQ;
+        option.textContent = `SEQ ${route.SEQ}`;
+        console.log(`SEQ ${route.SEQ}`);
         seqDropdown.appendChild(option);
     });
 }
 
-populateSeqDropdown(savedRoutes);
+populateSeqDropdown(uniqueSeqs);
+
+function removeDuplicateSeq(routes) {
+    const tempArray = [];
+    routes.forEach(route => {
+        if (!tempArray.includes(route.SEQ)) {
+            tempArray.push(route.SEQ);
+        }
+    });
+    return tempArray;
+}
+
+const uniqueSeqs = removeDuplicateSeq(savedRoutes);
+console.log('Unique SEQs:', uniqueSeqs);
+        
+
