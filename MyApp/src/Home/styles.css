@@ -66,7 +66,7 @@ body {
     color: black;
     line-height:5rem;
 }
-#loadPlanBtn, #kpiBtn {
+#loadPlanBtn, #kpiBtn, #upload-btn {
     outline: none;
     box-shadow: none; 
     background-color: transparent;
@@ -77,7 +77,7 @@ body {
     border: none; 
     cursor: pointer; 
 }
-#loadPlanBtn:hover, #kpiBtn:hover {
+#loadPlanBtn:hover, #kpiBtn:hover, #upload-btn:hover {
     text-decoration: underline; 
     color: #FA0203; 
 }
