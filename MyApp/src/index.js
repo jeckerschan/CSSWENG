@@ -141,6 +141,7 @@ const createWindow = () => {
 
     
     ipcMain.on('log-routes', (event, routes) => {
+        console.log('Routes received:', routes);
         routesData = routes.map((route, index) => ({
             sysRoute: route.sysRoute,
             rdd: route.rdd,
@@ -165,21 +166,20 @@ const createWindow = () => {
             ID: route.ID
         }));
         console.log('Routes stored:', routesData);
-       
 
-    ipcMain.on('log-updated-route', (event, updatedRoutes) => {
-    updatedRoutes.forEach(updatedRoute => {
-        const index = routesData.findIndex(route => route.ID === updatedRoute.ID);
-        if (index !== -1) {
-            routesData[index] = updatedRoute; // Update the route in memory
-            console.log(`Route with ID ${updatedRoute.ID} updated:`, updatedRoute);
-        } else {
-            console.log(`Route with ID ${updatedRoute.ID} not found for update.`);
-        }
     });
-
-    console.log('All updated routes have been logged.');
-});    
+    ipcMain.on('log-updated-route', (event, updatedRoutes) => {
+        updatedRoutes.forEach(updatedRoute => {
+            const index = routesData.findIndex(route => route.ID === updatedRoute.ID);
+            if (index !== -1) {
+                routesData[index] = updatedRoute; // Update the route in memory
+                console.log(`Route with ID ${updatedRoute.ID} updated:`, updatedRoute);
+            } else {
+                console.log(`Route with ID ${updatedRoute.ID} not found for update.`);
+            }
+        });
+    
+        console.log('All updated routes have been logged.');
     });
 
     ipcMain.on('request-route-amount', (event) => {
