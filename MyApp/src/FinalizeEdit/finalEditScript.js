@@ -16,13 +16,6 @@ function populateTable(data) {
         const row = document.createElement('tr');
         row.setAttribute('data-id', route.ID); 
         row.innerHTML = `
-            <td colspan="2">
-                <div class="px-1 d-flex justify-content-center">
-                    <a class="delete-btn" href="#">
-                        <i class="bi bi-x-square"></i>
-                    </a>
-                </div>
-            </td>
             <td contenteditable="true">${route.rdd || ''}</td>
             <td contenteditable="true">${route.Plant || ''}</td>
             <td contenteditable="true">${route.sysRoute || ''}</td>
