@@ -42,7 +42,7 @@ function parseCSV(csvContent) {
     const lines = csvContent.split('\n').filter(line => line.trim() !== ''); // Remove empty lines
     const headers = lines[0].split(',').map(header => header.trim()); // Parse and trim headers
 
-    let idCounter = parseInt(localStorage.getItem('currentId'), 10) || 1; // Load ID from localStorage or start from 1
+    //let idCounter = parseInt(localStorage.getItem('currentId'), 10) || 1; // Load ID from localStorage or start from 1
 
     const routes = lines.slice(1).map(line => {
         const values = line.split(',').map(value => value.trim()); // Parse and trim values
@@ -56,13 +56,13 @@ function parseCSV(csvContent) {
         });
 
         // Add SEQ and ID fields to each route
-        route.ID = idCounter++; // Assign current ID
+        //route.ID = idCounter++; // Assign current ID
         
         return route;
     });
 
     // Save updated ID counter to localStorage
-    localStorage.setItem('currentId', idCounter);
+    //localStorage.setItem('currentId', idCounter);
 
     // Log the routes for debugging
     console.log('Parsed Routes:', routes);
@@ -75,6 +75,7 @@ function parseCSV(csvContent) {
             drop: route['drop'] || null,
             finRoute: route['finRoute'] || null,
             strCode: route['strCode'] || null,
+            sysRouteAmt: 1,
             windowStart: route['windowStart'] || null,
             windowEnd: route['windowEnd'] || null,
             Plant: route['Plant'] || null,
@@ -89,6 +90,7 @@ function parseCSV(csvContent) {
             mix: route['mix'] || null,
             calltime: route['callTime'] || null,
             weightUtilization: route['weightUtilization'] || null,
+            ID: route['ID'] || null,
         });
     });
 
@@ -106,6 +108,7 @@ function createRoute(formData, copies = 1, isNewRoute = true) {
             drop: formData.drop,
             finRoute: formData.finRoute,
             strCode: formData.strCode,
+            sysRouteAmt: 1,
             windowStart: formData.windowStart,
             windowEnd: formData.windowEnd,
             Plant: formData.Plant,
@@ -120,6 +123,7 @@ function createRoute(formData, copies = 1, isNewRoute = true) {
             mix: formData.mix,
             calltime: formData.calltime,
             weightUtilization: formData.weightUtilization,
+            ID: formData.ID
         };
         routes.push(route);
     }
@@ -131,6 +135,8 @@ function createRoute(formData, copies = 1, isNewRoute = true) {
     let allRoutes = JSON.parse(localStorage.getItem('all-routes')) || [];
     allRoutes.push(...routes);
     localStorage.setItem('all-routes', JSON.stringify(allRoutes));
+    localStorage.setItem('currentId', formData.ID);
+   
 }
 
 
@@ -147,7 +153,7 @@ document.getElementById("import-csv").addEventListener("change", (event) => {
             const csvContent = e.target.result;
             const routes = parseCSV(csvContent);
             send("log-routes", routes);
-            send("navigate-to-menu");
+           // send("navigate-to-edit");
         };
         reader.readAsText(file);
     }
