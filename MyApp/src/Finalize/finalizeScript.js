@@ -16,11 +16,11 @@ function updateRoutesBySeq(selectedSeq, formData) {
     
     // Update only the filtered routes
     routesToUpdate.forEach(route => {
-        route.ton = formData.ton;
-        route.loaddate = formData.loaddate;
-        route.mix = formData.mix;
-        route.calltime = formData.calltime;
-        route.weightUtilization = formData.weightUtilization;
+        route.ton = formData.ton || route.ton;
+        route.loaddate = formData.loaddate || route.loaddate;
+        route.mix = formData.mix || route.mix;
+        route.calltime = formData.calltime || route.calltime;
+        route.weightUtilization = formData.weightUtilization || route.weightUtilization;
     });
 
     // Save the updated routes to localStorage and send them
