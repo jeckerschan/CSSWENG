@@ -1,6 +1,7 @@
 const { send, on } = window.electronAPI;
 let routeData = [];
 
+let currentId = parseInt(localStorage.getItem('currentId')) || 0; 
 const savedRoutes = JSON.parse(localStorage.getItem('log-routes')) || [];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -93,7 +94,10 @@ function parseCSV(csvContent) {
             ID: route['ID'] || null,
         });
     });
-
+    // Assign a unique ID to each route
+    routes.forEach((route, index) => {
+        route.ID = `${index}`;
+    });
     return routes;
 }
 
@@ -123,7 +127,7 @@ function createRoute(formData, copies = 1, isNewRoute = true) {
             mix: formData.mix,
             calltime: formData.calltime,
             weightUtilization: formData.weightUtilization,
-            ID: formData.ID
+            ID: currentId++,
         };
         routes.push(route);
     }
@@ -132,6 +136,7 @@ function createRoute(formData, copies = 1, isNewRoute = true) {
     updatedRoutes.push(...routes);
     localStorage.setItem('log-routes', JSON.stringify(updatedRoutes));
 
+    localStorage.setItem('currentId', currentId);
     let allRoutes = JSON.parse(localStorage.getItem('all-routes')) || [];
     allRoutes.push(...routes);
     localStorage.setItem('all-routes', JSON.stringify(allRoutes));
@@ -160,3 +165,5 @@ document.getElementById("import-csv").addEventListener("change", (event) => {
 });
 
 /**** TEST ***********************************************************************************/
+
+
