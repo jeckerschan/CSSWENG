@@ -1,6 +1,7 @@
 const { send, on } = window.electronAPI;
 let routeData = [];
 
+let currentId = parseInt(localStorage.getItem('currentId')) || 0;  
 const savedRoutes = JSON.parse(localStorage.getItem('log-routes')) || [];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -91,7 +92,10 @@ function parseCSV(csvContent) {
             weightUtilization: route['weightUtilization'] || null,
         });
     });
-
+    // Assign a unique ID to each route
+    routes.forEach((route, index) => {
+        route.ID = `${index}`;
+    });
     return routes;
 }
 
@@ -115,6 +119,7 @@ function createRoute(formData, copies = 1, isNewRoute = true) {
             volume: formData.volume,
             weight: formData.weight,
             SEQ: formData.SEQe,
+            ID: currentId++,
             ton: formData.ton,
             loaddate: formData.loaddate,
             mix: formData.mix,
@@ -122,11 +127,15 @@ function createRoute(formData, copies = 1, isNewRoute = true) {
             weightUtilization: formData.weightUtilization,
         };
         routes.push(route);
+
     }
+    // Assign unique IDs starting with 0
 
     const updatedRoutes = JSON.parse(localStorage.getItem('log-routes')) || [];
     updatedRoutes.push(...routes);
     localStorage.setItem('log-routes', JSON.stringify(updatedRoutes));
+
+    localStorage.setItem('currentId', currentId);
 
     let allRoutes = JSON.parse(localStorage.getItem('all-routes')) || [];
     allRoutes.push(...routes);

@@ -44,6 +44,10 @@ function createRoute(formData, copies = 1, isNewRoute = true) {
     localStorage.setItem('formData', JSON.stringify(formData));
 
     let allRoutes = JSON.parse(localStorage.getItem('all-routes')) || [];
+    routes.forEach((route, index) => {
+        route.ID = allRoutes.length + index;
+    });
+
     allRoutes = allRoutes.concat(routes);
     localStorage.setItem('all-routes', JSON.stringify(allRoutes));
 
