@@ -33,7 +33,7 @@ function addRouteRow(data) {
         storeCodeCell.innerText = route.strCode;
 
         const windowCell = document.createElement("td");
-        windowCell.innerText = route.window;
+        windowCell.innerText = route.windowStart + "-" + route.windowEnd;
 
         const entryTimeCell = document.createElement("td");
         entryTimeCell.innerText = ""; // Blank cell for entry time
@@ -48,12 +48,12 @@ function addRouteRow(data) {
         newRow.appendChild(exitTimeCell);
 
         const entryTimeInput = document.createElement("input");
-        entryTimeInput.type = "number";
+        entryTimeInput.type = "time";
         entryTimeInput.placeholder = "Enter time";
         entryTimeCell.appendChild(entryTimeInput);
 
         const exitTimeInput = document.createElement("input");
-        exitTimeInput.type = "number";
+        exitTimeInput.type = "time";
         exitTimeInput.placeholder = "Enter time";
         exitTimeCell.appendChild(exitTimeInput);
 

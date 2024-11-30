@@ -31,6 +31,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
    
 });
+
+document.getElementById("kpiBtn").addEventListener("click", () => {
+    send('navigate-to-kpi');
+});
+
+
 /**** TEST ***********************************************************************************/
 document.getElementById("upload-btn").addEventListener("click", () => {
     document.getElementById("import-csv").click();
