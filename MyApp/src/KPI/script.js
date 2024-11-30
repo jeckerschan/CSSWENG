@@ -1,7 +1,4 @@
-// Assuming that the HTML structure has these IDs
-
 document.addEventListener("DOMContentLoaded", () => {
-    
     const addRouteBtn = document.getElementById("addRouteBtn");
     const saveBtn = document.getElementById("saveBtn");
     const exitBtn = document.getElementById("exitBtn");
@@ -9,76 +6,132 @@ document.addEventListener("DOMContentLoaded", () => {
     const missCount = document.getElementById("missCount");
     const hmRatio = document.getElementById("hmRatio");
     const routeTable = document.getElementById("routeTableBody");
-    const dateElement = document.getElementById('date');
+    const dateElement = document.getElementById("date");
     const currentDate = new Date().toLocaleDateString();
     dateElement.textContent = currentDate;
 
-    let hits = 0; // Initial value based on your example
-    let misses = 0; // Initial value based on your example
+    let hits = 0;
+    let misses = 0;
 
     const savedRoutes = JSON.parse(localStorage.getItem('log-routes')) || [];
     console.log(savedRoutes);
 
-    // Update Hit/Miss Ratio
+    // Function to update Hit/Miss Ratio
     function updateHmRatio() {
-        let ratio = (hits / (hits + misses)) * 100;
+        const total = hits + misses;
+        let ratio = total > 0 ? (hits / total) * 100 : 0;
         hmRatio.innerText = `${ratio.toFixed(2)}%`;
     }
-// Function to add a new route row
-function addRouteRow(data) {
-    data.forEach(route => {
-        const newRow = document.createElement("tr");
 
-        const storeCodeCell = document.createElement("td");
-        storeCodeCell.innerText = route.strCode;
+    // Function to adjust hit/miss count
+    function adjustHitMissCount() {
+        hits = 0;
+        misses = 0;
 
-        const windowCell = document.createElement("td");
-        windowCell.innerText = route.windowStart + "-" + route.windowEnd;
+        const rows = routeTable.getElementsByTagName("tr");
 
-        const entryTimeCell = document.createElement("td");
-        entryTimeCell.innerText = ""; // Blank cell for entry time
+        for (let row of rows) {
+            const exitTimeInput = row.cells[3].querySelector("input");
+            const windowEnd = row.cells[1].innerText.split("-")[1];
 
-        const exitTimeCell = document.createElement("td");
-        exitTimeCell.innerText = ""; // Blank cell for exit time
+            if (exitTimeInput && exitTimeInput.value) {
+                const exitTime = new Date(`1970-01-01T${exitTimeInput.value}:00`);
+                const windowEndTime = new Date(`1970-01-01T${windowEnd}:00`);
 
-        // Append cells to the row
-        newRow.appendChild(storeCodeCell);
-        newRow.appendChild(windowCell);
-        newRow.appendChild(entryTimeCell);
-        newRow.appendChild(exitTimeCell);
+                if (exitTime <= windowEndTime) {
+                    hits++;
+                } else {
+                    misses++;
+                }
+            }
+        }
 
-        const entryTimeInput = document.createElement("input");
-        entryTimeInput.type = "time";
-        entryTimeInput.placeholder = "Enter time";
-        entryTimeCell.appendChild(entryTimeInput);
+        hitCount.innerText = hits;
+        missCount.innerText = misses;
+        updateHmRatio();
+    }
 
-        const exitTimeInput = document.createElement("input");
-        exitTimeInput.type = "time";
-        exitTimeInput.placeholder = "Enter time";
-        exitTimeCell.appendChild(exitTimeInput);
+    // Function to add a new route row
+    function addRouteRow(data) {
+        data.forEach(route => {
+            const newRow = document.createElement("tr");
 
-        // Append row to table body
-        routeTable.appendChild(newRow);
+            const storeCodeCell = document.createElement("td");
+            storeCodeCell.innerText = route.strCode;
 
-    });
-}
-// Load saved routes from localStorage on page load
-if (savedRoutes.length > 0) {
-    addRouteRow(savedRoutes);
-}
+            const windowCell = document.createElement("td");
+            windowCell.innerText = route.windowStart + "-" + route.windowEnd;
+
+            const entryTimeCell = document.createElement("td");
+            const exitTimeCell = document.createElement("td");
+            const actionCell = document.createElement("td");
+
+            const entryTimeInput = document.createElement("input");
+            entryTimeInput.type = "time";
+            entryTimeCell.appendChild(entryTimeInput);
+
+            const exitTimeInput = document.createElement("input");
+            exitTimeInput.type = "time";
+            exitTimeCell.appendChild(exitTimeInput);
+
+            const removeButton = document.createElement("button");
+            removeButton.innerText = "Remove";
+            removeButton.style.backgroundColor = "#f44336"; // Red background
+            removeButton.style.color = "white"; // White text
+            removeButton.style.border = "none";
+            removeButton.style.padding = "5px 10px";
+            removeButton.style.cursor = "pointer";
+            removeButton.style.transition = "background-color 0.3s, border-radius 0.3s";
+
+                    // Hover effect using mouse events
+            removeButton.addEventListener("mouseover", () => {
+                removeButton.style.backgroundColor = "#d32f2f"; // Darker red on hover
+                removeButton.style.borderRadius = "12px"; // Further smooth edges on hover
+            });
+            removeButton.addEventListener("mouseout", () => {
+                removeButton.style.backgroundColor = "#f44336"; // Revert to original color
+                removeButton.style.borderRadius = "8px"; // Revert to original border radius
+            });
 
 
-    // Function to save table data as .txt file
+
+            
+            actionCell.appendChild(removeButton);
+
+            newRow.appendChild(storeCodeCell);
+            newRow.appendChild(windowCell);
+            newRow.appendChild(entryTimeCell);
+            newRow.appendChild(exitTimeCell);
+            newRow.appendChild(actionCell);
+
+            removeButton.addEventListener("click", () => {
+                newRow.remove(); // Remove the row from the table
+
+            });
+
+            exitTimeInput.addEventListener("change", () => {
+                adjustHitMissCount();
+            });
+
+            routeTable.appendChild(newRow);
+        });
+    }
+
+    // Load saved routes from localStorage on page load
+    if (savedRoutes.length > 0) {
+        addRouteRow(savedRoutes);
+    }
+
+    // Save table data as a .txt file
     function saveAsTxt() {
         let data = "Store Code\tWindow\tEntry Time\tExit Time\n";
         const rows = routeTable.getElementsByTagName("tr");
 
         for (let row of rows) {
             const cells = row.getElementsByTagName("td");
-            data += `${cells[0].innerText}\t${cells[1].innerText}\t${cells[2].innerText}\t${cells[3].innerText}\n`;
+            data += `${cells[0].innerText}\t${cells[1].innerText}\t${cells[2].querySelector("input").value || ""}\t${cells[3].querySelector("input").value || ""}\n`;
         }
 
-        // Create a blob with the data
         const blob = new Blob([data], { type: "text/plain" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
@@ -91,56 +144,9 @@ if (savedRoutes.length > 0) {
     // Event Listeners
     saveBtn.addEventListener("click", saveAsTxt);
     exitBtn.addEventListener("click", () => {
-        window.location.href = "../../src/Home/home.html"; 
+        window.location.href = "../../src/Home/home.html";
     });
-    
-        exitTimeInput.addEventListener("change", () => {
-            const exitTime = exitTimeInput.value;
-            const windowTime = route.window;
 
-            if (exitTime <= windowTime) {
-            exitTimeInput.style.borderColor = "green";
-            hits++;
-            hitCount.innerText = hits;
-            updateHmRatio();
-            } else {
-            exitTimeInput.style.borderColor = "red";
-            misses++;
-            missCount.innerText = misses;
-            updateHmRatio();
-            }
-        });
-        // Function to adjust hit and miss count
-        function adjustHitMissCount() {
-            const rows = routeTable.getElementsByTagName("tr");
-            hits = 0;
-            misses = 0;
-
-            for (let row of rows) {
-                const exitTimeInput = row.cells[3].querySelector("input");
-                const windowTime = parseInt(row.cells[1].innerText);
-
-                if (exitTimeInput && exitTimeInput.value !== "") {
-                    const exitTime = parseInt(exitTimeInput.value);
-                    if (exitTime <= windowTime) {
-                        hits++;
-                    } else {
-                        misses++;
-                    }
-                }
-            }
-
-            hitCount.innerText = hits;
-            missCount.innerText = misses;
-            updateHmRatio();
-        }
-
-        // Add event listener to adjust hit/miss count on input change
-        routeTable.addEventListener("input", (event) => {
-            if (event.target.tagName === "INPUT" && event.target.type === "number") {
-                adjustHitMissCount();
-            }
-        });
     // Initialize Hit/Miss Ratio display
     hitCount.innerText = hits;
     missCount.innerText = misses;
