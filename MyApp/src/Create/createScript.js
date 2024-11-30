@@ -1,6 +1,11 @@
 const { send } = window.electronAPI;
 
-let currentId = parseInt(localStorage.getItem('currentId')) || 0;  
+let currentId = parseInt(localStorage.getItem('currentId')) || 0; 
+if (currentId != 0)
+    {
+        currentId++
+    } 
+
 const savedRoutes = JSON.parse(localStorage.getItem('log-routes')) || [];
 console.log('Loaded saved routes:', savedRoutes);
 
@@ -40,6 +45,7 @@ function createRoute(formData, copies = 1, isNewRoute = true) {
     localStorage.setItem('log-routes', JSON.stringify(updatedRoutes));
 
     localStorage.setItem('currentId', currentId);
+  
 
     localStorage.setItem('formData', JSON.stringify(formData));
 

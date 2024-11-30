@@ -196,6 +196,10 @@ const createWindow = () => {
             routesData[index] = updatedRoute; // Update the route in memory
             console.log(`Route with ID ${updatedRoute.ID} updated`, updatedRoute);
         }
+        else {
+            // Log a message if the ID is not found
+            console.warn(`Route with ID ${updatedRoute.ID} not found.`, updatedRoute);
+        }
     });
 
     ipcMain.handle('saveCSV', async (event, csvContent) => {

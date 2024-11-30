@@ -120,6 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function convertToCSV(data) {
     const headers = [
+        "ID",
         "rdd", 
         "Plant", 
         "sysRoute", 
@@ -140,6 +141,7 @@ function convertToCSV(data) {
         "drop", 
         "weightUtilization"];
     const rows = data.map(route => [
+        route.ID,
         route.rdd, 
         route.Plant, 
         route.sysRoute, 
@@ -171,4 +173,4 @@ document.getElementById("Save").addEventListener("click", () => {
 });
 
 // Add a button listener to export the routes
-document.getElementById("export-csv").addEventListener("click", convertToCSV);
+//document.getElementById("export-csv").addEventListener("click", convertToCSV);
